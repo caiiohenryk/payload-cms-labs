@@ -10,6 +10,7 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { HomeMedia } from './collections/HomeMedia'
 import { Partners } from './collections/Partners'
+import { googleLoginEnabled, googleOAuthPlugin } from './plugins/googleOAuth'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -17,6 +18,9 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     user: Users.slug,
+    components: {
+      afterLogin: googleLoginEnabled ? ['/components/GoogleLoginButton#GoogleLoginButton'] : [],
+    },
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -37,5 +41,5 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [googleOAuthPlugin],
 })
