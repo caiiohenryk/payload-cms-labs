@@ -1,5 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { pt } from '@payloadcms/translations/languages/pt'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -17,6 +18,10 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+  },
+  i18n: {
+    supportedLanguages: { pt },
+    fallbackLanguage: 'pt',
   },
   collections: [Users, Media],
   editor: lexicalEditor(),
