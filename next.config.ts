@@ -7,6 +7,8 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  // Native (napi) binding; must be loaded by Node instead of bundled
+  serverExternalPackages: ['@neplex/vectorizer'],
   images: {
     localPatterns: [
       {

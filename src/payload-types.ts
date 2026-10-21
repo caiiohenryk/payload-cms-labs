@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     'home-media': HomeMedia;
+    partners: Partner;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'home-media': HomeMediaSelect<false> | HomeMediaSelect<true>;
+    partners: PartnersSelect<false> | PartnersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -186,6 +188,26 @@ export interface HomeMedia {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners".
+ */
+export interface Partner {
+  id: number;
+  title: string;
+  link: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -219,6 +241,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'home-media';
         value: number | HomeMedia;
+      } | null)
+    | ({
+        relationTo: 'partners';
+        value: number | Partner;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -310,6 +336,25 @@ export interface MediaSelect<T extends boolean = true> {
 export interface HomeMediaSelect<T extends boolean = true> {
   alt?: T;
   type?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "partners_select".
+ */
+export interface PartnersSelect<T extends boolean = true> {
+  title?: T;
+  link?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
